@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "550251323835",
+    "firebase_url": "https://sensor-service-3f25b.firebaseio.com",
+    "project_id": "sensor-service-3f25b",
+    "storage_bucket": "sensor-service-3f25b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550251323835:android:1334b2cc8214e80b",
+        "android_client_info": {
+          "package_name": "com.final_sem_project.tomhardy.sensorservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550251323835-ll86rj3g1mja7pt3g9irifjq1bsta28j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa8fYnpxtdlejNy0L8GjJPYamc1dfiJTg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
