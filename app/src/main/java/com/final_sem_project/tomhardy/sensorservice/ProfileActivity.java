@@ -218,6 +218,7 @@ public class ProfileActivity extends AppCompatActivity {
         new UsersDatabaseOperation("updateUsers", statusOnline, -1, -1, false).execute();
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
         sensorManager.registerListener(sensorEventListenerProximity, proximitySensor, SensorManager.SENSOR_DELAY_UI);
         sensorManager.registerListener(sensorEventListenerLight, lightSensor, SensorManager.SENSOR_DELAY_UI);
