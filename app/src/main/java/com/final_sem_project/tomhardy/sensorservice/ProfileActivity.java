@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private final String TAG = "ProfileActivity";
 
     private String methodName = "";
     final private String nameSpace = "http://android.webservice.com/";
@@ -130,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity {
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Notification", " is received");
+            Log.d(TAG, "Notification is received");
             new UsersDatabaseOperation("updateUsers", statusOnline, proximity, light, true).execute();
         }
     };
@@ -140,7 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Log.d("ProfileActivity", "onCreate");
+        Log.d(TAG, "onCreate");
 
         locationManager = (LocationManager) ProfileActivity.this.getSystemService(Context.LOCATION_SERVICE);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -159,7 +162,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(ProfileActivity.this)) {
-            Log.e("keshav", "Gps not enabled");
+            Log.e(TAG, " Gps not enabled");
             Toast.makeText(ProfileActivity.this, "Gps not enabled", Toast.LENGTH_SHORT).show();
             enableLoc();
         }
@@ -167,38 +170,38 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth == null)
-            Log.d("firebaseAuth", "null");
+            Log.d(TAG, "firebaseAuth = null");
         else
-            Log.d("firebaseAuth", firebaseAuth + "");
+            Log.d(TAG, "firebaseAuth : " + firebaseAuth);
 
         ((TextView) findViewById(R.id.textView)).setText("Welcome " + firebaseAuth.getCurrentUser().getEmail());
 
         String type = getIntent().getStringExtra("type");
         token = getIntent().getStringExtra("token");
-        Log.d("token ProfileActivity", token);
+        Log.d(TAG, "token : " + token);
         if (type.equals("signup")) {
-            Log.d("type", type);
+            Log.d(TAG, "type : " + type);
             user_name = getIntent().getStringExtra("email");
             password = getIntent().getStringExtra("password");
 
             new UsersDatabaseOperation("signUp", statusOnline, -1, -1, false).execute();
 
         } else if (type.equals("signin") || type.equals("login")) {
-            Log.d("type", type);
+            Log.d(TAG, "type" + type);
             user_name = firebaseAuth.getCurrentUser().getEmail();
 
             new UsersDatabaseOperation("updateUsers", statusOnline, 0, 0, false).execute();
 
         }
 
-        Log.d("user_name ", user_name);
+        Log.d(TAG, "user_name : " + user_name);
     }
 
     @Override
     protected void onPause() {
         new UsersDatabaseOperation("updateUsers", statusOffline, -1, -1, false).execute();
         super.onPause();
-        Log.d("ProfileActivity", "onPause");
+        Log.d(TAG, "onPause");
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
@@ -211,7 +214,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("ProfileActivity", "onResume");
+        Log.d(TAG, "onResume");
 
         LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver), new IntentFilter("Notification"));
 
@@ -229,7 +232,7 @@ public class ProfileActivity extends AppCompatActivity {
         new UsersDatabaseOperation("updateUsers", statusOffline, -1, -1, false).execute();
         super.onDestroy();
 
-        Log.d("ProfileActivity", "onDestroy");
+        Log.d(TAG, "onDestroy");
     }
 
     private boolean hasGPSDevice(Context context) {
@@ -263,7 +266,7 @@ public class ProfileActivity extends AppCompatActivity {
                         @Override
                         public void onConnectionFailed(ConnectionResult connectionResult) {
 
-                            Log.d("Location error", "Location error " + connectionResult.getErrorCode());
+                            Log.d(TAG, "Location error : " + connectionResult.getErrorCode());
                         }
                     }).build();
             googleApiClient.connect();
@@ -304,7 +307,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void logOut(View view) {
         firebaseAuth.signOut();
 
-        Log.d("logOut", "ProfileActivity " + user_name);
+        Log.d(TAG, "logOut : " + user_name);
         new UsersDatabaseOperation("updateUsers", statusOffline, 0, 0, false).execute();
 
         new Thread(new Runnable() {
@@ -369,7 +372,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (methodName.equals("updateUsers")) {
                 request.addProperty("proximity", Float.toString(proximity));
                 request.addProperty("light", Float.toString(light));
-                Log.d("proximity_light", proximity + " , " + light);
+                Log.d(TAG, "proximity : " + proximity + " , light : " + light);
             }
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapSerializationEnvelope.VER11);
@@ -392,10 +395,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            Log.d("Status", " : " + s + " ,status " + status + " ,method " + methodName + ", " + proximity + " , " + light);
+            Log.d(TAG, "Status : " + s + " ,status " + status + " ,method " + methodName + ", " + proximity + " , " + light);
             if (notificationReceived) {
 //                Log.d("Status", " : " + s + " ,user_name " + user_name + " ,method " + methodName + ", " + proximity + " , " + light);
-                Log.d("notificationReceived ", " " + notificationReceived);
+                Log.d(TAG, "notificationReceived : " + notificationReceived);
                 ((TextView) findViewById(R.id.textView2)).setText("status : " + s + " , method: " + methodName + " , proximity: " + proximity + " , light: " + light);
                 notificationReceived = false;
             }

@@ -19,11 +19,13 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
+    private final String TAG = "FirebaseMessageService";
+
     private LocalBroadcastManager broadcaster;
 
     @Override
     public void onCreate() {
-        Log.d("FirebaseMessageService", "onCreate");
+        Log.d(TAG, "onCreate");
         broadcaster = LocalBroadcastManager.getInstance(this);
     }
 
@@ -54,7 +56,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
     private void showNotification(String title, String message) {
-        Log.d("Notification :", title + " came  " + message);
+        Log.d(TAG, "Notification : " + title + " came  " + message);
 
         initChannels(this);
 

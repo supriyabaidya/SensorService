@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private final String TAG = "LoginActivity";
+
     private String token = null;
 
     private FirebaseAuth firebaseAuth;
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Could not register, " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d("exception", "Could not register, " + task.getException().getMessage());
+                    Log.d(TAG, "exception : Could not register, " + task.getException().getMessage());
                 }
                 progressDialog.cancel();
             }

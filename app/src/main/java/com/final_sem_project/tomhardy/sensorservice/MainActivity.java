@@ -21,6 +21,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String TAG = "MainActivity";
+
     private String token = null;
     private FirebaseAuth firebaseAuth;
 
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("onCreate", "main");
+        Log.d(TAG, "onCreate");
 
         new Thread(new Runnable() {
             @Override
@@ -39,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
                 while (true) {
                     token = FirebaseInstanceId.getInstance().getToken();
                     if (token != null) {
-                        Log.d("device token", "is received " + token);
+                        Log.d(TAG, "device token is received " + token);
                         break;
                     } else
-                        Log.d("device token", "is not received ");
+                        Log.d(TAG, "device token is not received ");
 
                     try {
                         Thread.sleep(1000);
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Could not register, " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d("exception", "Could not register, " + task.getException().getMessage());
+                    Log.d(TAG, "exception : Could not register, " + task.getException().getMessage());
                 }
 
                 progressDialog.cancel();

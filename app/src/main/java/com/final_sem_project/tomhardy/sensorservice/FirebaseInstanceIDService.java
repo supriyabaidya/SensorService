@@ -6,6 +6,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.io.IOException;
+import java.lang.annotation.Target;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -20,16 +21,18 @@ import okhttp3.Response;
 
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
 
+    private final String TAG = "FirebaseInstncIDService";
+
     @Override
     public void onTokenRefresh() {
         String token = FirebaseInstanceId.getInstance().getToken();
 
-        Log.d("onTokenRefresh", "is called " + token);
+        Log.d(TAG, "onTokenRefresh is called " + token);
 //        registerToken(token);
     }
 
     private void registerToken(String token) {
-        Log.d("registerToken", "is called");
+        Log.d(TAG, "registerToken is called");
 
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
@@ -43,7 +46,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
 
         try {
             Response result = client.newCall(request).execute();
-            Log.d("result", "status " + result.isSuccessful());
+            Log.d(TAG, "result : status " + result.isSuccessful());
         } catch (IOException e) {
             e.printStackTrace();
         }
