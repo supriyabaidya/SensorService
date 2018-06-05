@@ -4,7 +4,17 @@
             "outputFile": "E:\\Googledrive\\onedrive\\android\\SensorService\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\TomHardy\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\f42184cae381e07556aa8a12058d4ff2\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\TomHardy\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\97a0eedeca4f5bb6ef9d352da72e5beb\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\TomHardy\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\7e44207566f2d4afef3f317f816a4ff5\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\TomHardy\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\9ebe250492d3782b5ed4c511e64cd7f5\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]
